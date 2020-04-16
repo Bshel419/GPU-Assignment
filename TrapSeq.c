@@ -1,32 +1,36 @@
 #include<stdlib.h>
 #include<math.h>
 
-float findArea(float b1, float b2);
+float findArea(float h, float b1, float b2);
 float sine(float num);
 float cosine(float num);
 float exponent(float num, int ex);
+float trapRule(float a, float b, int n);
+float chooseFunc(float x);
+
 
 int main()
 {
+    float integral = trapRule(0, 5, 10);
+    printf("%lf", trapRule(0, 5,10));
     return 0;
 }
 
-float findArea(float h, float b1, float b2)
+float trapRule(float a, float b, int n)
 {
-    return h * ((b1 + b2) / 2);
-}
+    float deltaX, sum = 0;
 
-float sine(float num)
-{
-    return sin(num);
-}
+    deltaX = (b-a)/n;
 
-float cosine(float num)
-{
-    return cos(num);
-}
+    int i;
+    float x = a;
 
-float xSquared(float num, int ex)
-{
-    return pow(x, ex);
+    for(i = 1; i < n; i++)
+    {
+        x += deltaX;
+
+        sum += 2 * pow(x, 2);
+    }
+
+    return deltaX/2.0 * (pow(a, 2) + sum + pow(b, 2));
 }
